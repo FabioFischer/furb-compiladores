@@ -109,11 +109,16 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
             }
         }
 
-        /*
-        for (styleSheet in Resources.getStyleSheets()) {
-            scene.stylesheets.add(styleSheet)
-        }
+        /**
+         * Utilizar para build
+         *
+            for (styleSheet in Resources.getStyleSheets()) {
+                scene.stylesheets.add(styleSheet)
+            }
         */
+        for (styleSheet in Resources.getStyleSheets()) {
+            scene.stylesheets.add(styleSheet.toString())
+        }
 
         pane.prefHeightProperty().bind(scene.heightProperty())
         pane.prefWidthProperty().bind(scene.widthProperty())
@@ -151,7 +156,6 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
 
     private fun initButtons() {
         try {
-            /*
             initButton(newFileButton, "Novo [Ctrl+N)", ImageView(Resources.newFile), UPPER_BAR_HEIGHT)
             initButton(openFileButton, "Abrir [Ctrl+O)", ImageView(Resources.openFile), UPPER_BAR_HEIGHT)
             initButton(saveFileButton, "Salvar [Ctrl+S)", ImageView(Resources.saveFile), UPPER_BAR_HEIGHT)
@@ -160,7 +164,6 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
             initButton(cutTextButton, "Cortar [Ctrl+X]", ImageView(Resources.cutText), UPPER_BAR_HEIGHT)
             initButton(buildProjectButton, "Compilar [F8]", ImageView(Resources.buildProject), UPPER_BAR_HEIGHT)
             initButton(appTeam, "Equipe [F1]", ImageView(Resources.appTeam), UPPER_BAR_HEIGHT)
-            */
         } catch (e: NoSuchFileException) {
             println(e.printStackTrace())
         }
