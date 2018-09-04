@@ -12,6 +12,7 @@ import java.nio.file.Paths
  **/
 
 object Resources {
+    /*
     val newFile: Image = Image("res/icon/gallery/new.png")
     val openFile: Image = Image("res/icon/gallery/open.png")
     val saveFile: Image = Image("res/icon/gallery/save.png")
@@ -21,6 +22,7 @@ object Resources {
     val buildProject: Image = Image("res/icon/gallery/build.png")
     val appTeam: Image = Image("res/icon/gallery/team.png")
 
+    */
     fun getStyleSheets():List<String> {
         return listOf(Resources::class.java.getResource("style/text-area.css").toExternalForm())
     }

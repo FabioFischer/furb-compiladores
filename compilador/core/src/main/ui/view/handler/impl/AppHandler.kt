@@ -1,10 +1,5 @@
 package ui.view.handler.impl
 
-import core.analyser.lexical.Lexical
-import core.analyser.lexical.LexicalError
-import core.analyser.semantic.Semantic
-import core.analyser.syntatic.Syntatic
-import core.analyser.syntatic.SyntaticError
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import javafx.stage.FileChooser
@@ -27,8 +22,6 @@ import java.io.StringReader
 class AppHandler : IAppHandler {
     val fileController = FileController()
     val robot = Robot()
-
-    val syntatic = Syntatic()
 
     val APPLICATION_TEAM_MESSAGE = "Aplicativo desenvolvido pelos alunos Fábio Luiz Fischer & Matheus Felipe Klauberg para disciplina de Compiladores."
 
@@ -131,15 +124,8 @@ class AppHandler : IAppHandler {
             if (root.contentArea.text.isNullOrEmpty()) {
                 root.writeConsole("nenhum programa para compilar na área reservada para mensagens.")
             } else {
-                syntatic.parse(Lexical(StringReader(root.contentArea.text)), Semantic())
                 root.writeConsole("programa compilado com sucesso\n", true)
             }
-        } catch (e: LexicalError) {
-            root.writeConsole("Erro na linha ${getLine(root, e.position)} - ${e.message!!}", true)
-
-        } catch (e: SyntaticError) {
-            root.writeConsole("Erro na linha ${getLine(root, e.position)} - ${e.message!!}", true)
-
         } catch (e: Exception) {
             println(e.printStackTrace())
             root.showDialogMessage(Settings.APP_NAME, "Erro ao compilar programa.", e.message!!, Alert.AlertType.ERROR)
