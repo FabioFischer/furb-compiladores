@@ -14,7 +14,7 @@ import ui.view.screen.IScreenBuilder
  *   FURB - Bacharelado em Ciências da Computação
  *   Compiladores - Interface
  *
- *   Fábio Luiz Fischer & Matheus Felipe Klauberg
+ *   Fábio Luiz Fischer
  **/
 
 abstract class AbstractScreen(val screenSize: ScreenSize, var screenName: String) : Application(), IScreenBuilder {

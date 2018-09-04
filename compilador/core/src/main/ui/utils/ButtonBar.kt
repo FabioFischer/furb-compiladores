@@ -8,7 +8,7 @@ import javafx.scene.layout.Priority
  *   FURB - Bacharelado em Ciências da Computação
  *   Compiladores - Interface
  *
- *   Fábio Luiz Fischer & Matheus Felipe Klauberg
+ *   Fábio Luiz Fischer
  **/
 
 class ButtonBar(maxWidth: Double = Double.MAX_VALUE, spacing: Double = 0.0, vararg buttons: Button) : HBox(spacing) {

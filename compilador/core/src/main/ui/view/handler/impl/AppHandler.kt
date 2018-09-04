@@ -16,7 +16,7 @@ import java.io.StringReader
  *   FURB - Bacharelado em Ciências da Computação
  *   Compiladores - Interface
  *
- *   Fábio Luiz Fischer & Matheus Felipe Klauberg
+ *   Fábio Luiz Fischer
  **/
 
 class AppHandler : IAppHandler {

@@ -25,7 +25,7 @@ import java.nio.file.Path
  *   FURB - Bacharelado em Ciências da Computação
  *   Compiladores - Interface
  *
- *   Fábio Luiz Fischer & Matheus Felipe Klauberg
+ *   Fábio Luiz Fischer
  **/
 
 class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {

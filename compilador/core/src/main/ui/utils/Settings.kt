@@ -6,7 +6,7 @@ import javafx.stage.FileChooser
  *   FURB - Bacharelado em Ciências da Computação
  *   Compiladores - Interface
  *
- *   Fábio Luiz Fischer & Matheus Felipe Klauberg
+ *   Fábio Luiz Fischer
  **/
 
 object Settings {
