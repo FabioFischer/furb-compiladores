@@ -29,8 +29,8 @@ import java.nio.file.Path
  **/
 
 class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
-    val UPPER_BAR_WIDTH = 910.0
-    val UPPER_BAR_HEIGHT = 65.0
+    val LEFT_BAR_WIDTH = 65.0
+    val LEFT_BAR_HEIGHT = 400.0
     val CONSOLE_HEIGHT = 100.0
     val STATUS_BAR_HEIGHT = 25.0
     val STATUS_BAR_WIDTH = 100.0
@@ -38,7 +38,7 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
 
     private val pane = BorderPane()
 
-    private val upperBox = ButtonBar(UPPER_BAR_WIDTH, 2.0)
+    private val leftBox = ButtonBar(LEFT_BAR_HEIGHT, 2.0)
     private val bottomBox = VBox()
     private val statusBox = HBox()
 
@@ -89,8 +89,8 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
 
     @Suppress("NON_EXHAUSTIVE_WHEN")
     override fun initScene(): Scene {
-        pane.top = upperBox
-        pane.left = lineNumberArea
+        //pane.top = upperBox
+        pane.left = leftBox
         pane.center = contentArea
         pane.bottom = bottomBox
 
@@ -149,21 +149,21 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
     }
 
     private fun initBoxes() {
-        upperBox.addAll(newFileButton, openFileButton, saveFileButton, copyTextButton, pasteTextButton, cutTextButton, buildProjectButton, appTeam)
+        leftBox.addAll(newFileButton, openFileButton, saveFileButton, copyTextButton, pasteTextButton, cutTextButton, buildProjectButton, appTeam)
         initHBox(statusBox, 5.0, statusLabel, filePathLabel)
         initVBox(bottomBox, 1.0, consoleArea, statusBox)
     }
 
     private fun initButtons() {
         try {
-            initButton(newFileButton, "Novo [Ctrl+N)", ImageView(Resources.newFile), UPPER_BAR_HEIGHT)
-            initButton(openFileButton, "Abrir [Ctrl+O)", ImageView(Resources.openFile), UPPER_BAR_HEIGHT)
-            initButton(saveFileButton, "Salvar [Ctrl+S)", ImageView(Resources.saveFile), UPPER_BAR_HEIGHT)
-            initButton(copyTextButton, "Copiar [Ctrl+C)", ImageView(Resources.copyText), UPPER_BAR_HEIGHT)
-            initButton(pasteTextButton, "Colar [Ctrl+V)", ImageView(Resources.pasteText), UPPER_BAR_HEIGHT)
-            initButton(cutTextButton, "Cortar [Ctrl+X]", ImageView(Resources.cutText), UPPER_BAR_HEIGHT)
-            initButton(buildProjectButton, "Compilar [F8]", ImageView(Resources.buildProject), UPPER_BAR_HEIGHT)
-            initButton(appTeam, "Equipe [F1]", ImageView(Resources.appTeam), UPPER_BAR_HEIGHT)
+            initButton(newFileButton, "Novo [Ctrl+N)", ImageView(Resources.newFile), 20.0)
+            initButton(openFileButton, "Abrir [Ctrl+O)", ImageView(Resources.openFile), 20.0)
+            initButton(saveFileButton, "Salvar [Ctrl+S)", ImageView(Resources.saveFile), 20.0)
+            initButton(copyTextButton, "Copiar [Ctrl+C)", ImageView(Resources.copyText), 20.0)
+            initButton(pasteTextButton, "Colar [Ctrl+V)", ImageView(Resources.pasteText), 20.0)
+            initButton(cutTextButton, "Cortar [Ctrl+X]", ImageView(Resources.cutText), 20.0)
+            initButton(buildProjectButton, "Compilar [F8]", ImageView(Resources.buildProject), 20.0)
+            initButton(appTeam, "Equipe [F1]", ImageView(Resources.appTeam), 20.0)
         } catch (e: NoSuchFileException) {
             println(e.printStackTrace())
         }

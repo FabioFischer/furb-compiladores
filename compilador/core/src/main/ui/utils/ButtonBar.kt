@@ -1,7 +1,7 @@
 package ui.utils
 
 import javafx.scene.control.Button
-import javafx.scene.layout.HBox
+import javafx.scene.layout.VBox
 import javafx.scene.layout.Priority
 
 /**
@@ -11,13 +11,14 @@ import javafx.scene.layout.Priority
  *   Fábio Luiz Fischer
  **/
 
-class ButtonBar(maxWidth: Double = Double.MAX_VALUE, spacing: Double = 0.0, vararg buttons: Button) : HBox(spacing) {
+class ButtonBar(selfMaxHeight: Double = Double.MAX_VALUE, spacing: Double = 0.0, vararg buttons: Button) : VBox(spacing) {
     init {
-        setMaxWidth(maxWidth)
+        maxHeight = selfMaxHeight
+
         children.addAll(buttons)
         for (b in buttons) {
-            HBox.setHgrow(b, Priority.ALWAYS)
-            b.maxWidth = Double.MAX_VALUE
+            VBox.setVgrow(b, Priority.ALWAYS)
+            b.maxHeight = Double.MAX_VALUE
         }
     }
 
@@ -28,8 +29,8 @@ class ButtonBar(maxWidth: Double = Double.MAX_VALUE, spacing: Double = 0.0, vara
     }
 
     fun addButton(button: Button) {
-        HBox.setHgrow(button, Priority.ALWAYS)
-        button.maxWidth = Double.MAX_VALUE
+        VBox.setVgrow(button, Priority.ALWAYS)
+        button.maxHeight = Double.MAX_VALUE
         val buttons = children
         if (!buttons.contains(button)) {
             buttons.add(button)
@@ -41,18 +42,18 @@ class ButtonBar(maxWidth: Double = Double.MAX_VALUE, spacing: Double = 0.0, vara
     }
 
     override fun layoutChildren() {
-        val minPrefWidth = calculatePrefChildWidth()
-        children
-                .filterIsInstance<Button>()
-                .forEach { (it).minWidth = minPrefWidth }
+        val minPrefHeight = calculatePrefChildHeight()
+
+        children.filterIsInstance<Button>()
+                .forEach { (it).minHeight = minPrefHeight }
+
         super.layoutChildren()
     }
 
-    private fun calculatePrefChildWidth(): Double {
-        val minPrefWidth = children
-                .map { it.prefWidth(-1.0) }
+    private fun calculatePrefChildHeight(): Double {
+        return children
+                .map { it.prefHeight(-1.0) }
                 .max()
                 ?: 0.0
-        return minPrefWidth
     }
 }
