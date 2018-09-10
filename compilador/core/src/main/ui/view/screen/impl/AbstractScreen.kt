@@ -37,9 +37,9 @@ abstract class AbstractScreen(val screenSize: ScreenSize, var screenName: String
         textArea.isDisable = isDisable
     }
 
-    fun initButton(button: Button, text: String, graphic: Node? = null, height: Double) {
+    fun initButton(button: Button, text: String, graphic: Node? = null, width: Double) {
         button.text = text
-        button.minHeight = height
+        button.minWidth = width
         button.contentDisplay = ContentDisplay.TOP
         if (graphic != null) button.graphic = graphic
     }

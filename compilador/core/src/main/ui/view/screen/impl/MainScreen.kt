@@ -29,8 +29,8 @@ import java.nio.file.Path
  **/
 
 class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
-    val LEFT_BAR_WIDTH = 65.0
-    val LEFT_BAR_HEIGHT = 400.0
+    val TOOL_BAR_WIDTH = 145.0
+    val TOOL_BAR_HEIGHT = 590.0
     val CONSOLE_HEIGHT = 100.0
     val STATUS_BAR_HEIGHT = 25.0
     val STATUS_BAR_WIDTH = 100.0
@@ -38,7 +38,8 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
 
     private val pane = BorderPane()
 
-    private val leftBox = ButtonBar(LEFT_BAR_HEIGHT, 2.0)
+    private val toolBox = ButtonBar(TOOL_BAR_HEIGHT, 2.0)
+    private val contentBox = HBox()
     private val bottomBox = VBox()
     private val statusBox = HBox()
 
@@ -90,7 +91,7 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
     @Suppress("NON_EXHAUSTIVE_WHEN")
     override fun initScene(): Scene {
         //pane.top = upperBox
-        pane.left = leftBox
+        pane.left = contentBox
         pane.center = contentArea
         pane.bottom = bottomBox
 
@@ -104,7 +105,7 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
                 KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_ANY).code -> fileHandler.copyTextRequest(this)
                 KeyCodeCombination(KeyCode.V, KeyCombination.CONTROL_ANY).code -> fileHandler.pasteTextRequest(this)
                 KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_ANY).code -> fileHandler.cutTextRequest(this)
-                KeyCode.F8 -> fileHandler.buildProjectRequest(this)
+                KeyCode.F9 -> fileHandler.buildProjectRequest(this)
                 KeyCode.F1 -> fileHandler.applicationTeamRequest(this)
             }
         }
@@ -141,29 +142,30 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
     }
 
     private fun initTextAreas() {
-        initTextArea(lineNumberArea, LINE_NUMBER_WIDTH, pane.height, false, true)
-        initTextArea(consoleArea, pane.width, CONSOLE_HEIGHT, false)
-        initTextArea(contentArea, pane.width, pane.height)
+        initTextArea(lineNumberArea, LINE_NUMBER_WIDTH, screenSize.x, false, true)
+        initTextArea(consoleArea, screenSize.y, CONSOLE_HEIGHT, false)
+        initTextArea(contentArea, screenSize.y, screenSize.x)
 
         lineNumberArea.nodeOrientation = NodeOrientation.RIGHT_TO_LEFT
     }
 
     private fun initBoxes() {
-        leftBox.addAll(newFileButton, openFileButton, saveFileButton, copyTextButton, pasteTextButton, cutTextButton, buildProjectButton, appTeam)
+        toolBox.addAll(newFileButton, openFileButton, saveFileButton, copyTextButton, pasteTextButton, cutTextButton, buildProjectButton, appTeam)
+        initHBox(contentBox, 2.0, toolBox, lineNumberArea)
         initHBox(statusBox, 5.0, statusLabel, filePathLabel)
         initVBox(bottomBox, 1.0, consoleArea, statusBox)
     }
 
     private fun initButtons() {
         try {
-            initButton(newFileButton, "Novo [Ctrl+N)", ImageView(Resources.newFile), 20.0)
-            initButton(openFileButton, "Abrir [Ctrl+O)", ImageView(Resources.openFile), 20.0)
-            initButton(saveFileButton, "Salvar [Ctrl+S)", ImageView(Resources.saveFile), 20.0)
-            initButton(copyTextButton, "Copiar [Ctrl+C)", ImageView(Resources.copyText), 20.0)
-            initButton(pasteTextButton, "Colar [Ctrl+V)", ImageView(Resources.pasteText), 20.0)
-            initButton(cutTextButton, "Cortar [Ctrl+X]", ImageView(Resources.cutText), 20.0)
-            initButton(buildProjectButton, "Compilar [F8]", ImageView(Resources.buildProject), 20.0)
-            initButton(appTeam, "Equipe [F1]", ImageView(Resources.appTeam), 20.0)
+            initButton(newFileButton, "new [ctrl-n)", ImageView(Resources.newFile), TOOL_BAR_WIDTH)
+            initButton(openFileButton, "open [ctrl-o)", ImageView(Resources.openFile), TOOL_BAR_WIDTH)
+            initButton(saveFileButton, "save [ctrl-s)", ImageView(Resources.saveFile), TOOL_BAR_WIDTH)
+            initButton(copyTextButton, "copy [ctrl-c)", ImageView(Resources.copyText), TOOL_BAR_WIDTH)
+            initButton(pasteTextButton, "paste [ctrl-v)", ImageView(Resources.pasteText), TOOL_BAR_WIDTH)
+            initButton(cutTextButton, "cut [ctrl-x]", ImageView(Resources.cutText), TOOL_BAR_WIDTH)
+            initButton(buildProjectButton, "compile [F9]", ImageView(Resources.buildProject), TOOL_BAR_WIDTH)
+            initButton(appTeam, "about [F1]", ImageView(Resources.appTeam), TOOL_BAR_WIDTH)
         } catch (e: NoSuchFileException) {
             println(e.printStackTrace())
         }
