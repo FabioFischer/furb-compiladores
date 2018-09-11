@@ -9,8 +9,6 @@ import javax.swing.JOptionPane
  *   Compiladores - Interface
  *
  *   Fábio Luiz Fischer
- **/
-
 
 object App {
     @JvmStatic fun main(args: Array<String>) {
@@ -18,17 +16,18 @@ object App {
             Application.launch(MainScreen::class.java)
         } catch(e: Exception) {
             print(e);
-            JOptionPane.showMessageDialog(null,e.message + " - " + e.stackTrace);
+            JOptionPane.showMessageDialog(null, e.message + " - " + e.stackTrace);
         }
     }
 }
+ **/
 
 // Para gerar arquivo .jar, deve-se utilizar a função 'main' abaixo
-//fun main(args: Array<String>) {
-//    try {
-//        Application.launch(MainScreen::class.java)
-//    } catch(e: Exception) {
-//        print(e);
-//        JOptionPane.showMessageDialog(null,e.message + " - " + e.stackTrace);
-//    }
-//}
+fun main(args: Array<String>) {
+    try {
+        Application.launch(MainScreen::class.java)
+    } catch(e: Exception) {
+        print(e);
+        JOptionPane.showMessageDialog(null, e.message + " - " + e.stackTrace);
+    }
+}

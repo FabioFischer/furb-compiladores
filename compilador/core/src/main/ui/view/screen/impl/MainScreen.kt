@@ -5,6 +5,7 @@ import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextArea
+import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.input.KeyCode
 import javafx.scene.input.KeyCodeCombination
@@ -20,6 +21,7 @@ import ui.utils.Resources
 import ui.utils.Settings
 import ui.view.handler.impl.AppHandler
 import ui.view.listener.AppListener
+import javax.swing.JOptionPane
 import java.nio.file.Path
 
 /**
@@ -31,12 +33,13 @@ import java.nio.file.Path
 
 class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
     val TOOL_BAR_WIDTH = 145.0
-    val TOOL_BAR_HEIGHT = 390.0
+    val TOOL_BAR_HEIGHT = 590.0
     val CONSOLE_HEIGHT = 105.0
     val CONSOLE_WIDTH = 750.0
     val STATUS_BAR_HEIGHT = 25.0
     val STATUS_BAR_WIDTH = 100.0
     val LINE_NUMBER_WIDTH = 42.0
+    val MIN_TEXT_CONTENT_WIDTH = 740.0
 
     private val pane = BorderPane()
 
@@ -85,7 +88,7 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
         primaryStage.scene = initScene()
         primaryStage.title = screenName
         primaryStage.minHeight = screenSize.x
-        primaryStage.minWidth = screenSize.y
+        primaryStage.minWidth = 900.0
 
         primaryStage.show()
     }
@@ -119,13 +122,15 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
         /**
          * Utilizar para build
          *
-            for (styleSheet in Resources.getStyleSheets()) {
-                scene.stylesheets.add(styleSheet)
-            }
-        */
+         */
+        for (styleSheet in Resources.getStyleSheets()) {
+            scene.stylesheets.add(styleSheet)
+        }
+        /*
         for (styleSheet in Resources.getStyleSheets()) {
             scene.stylesheets.add(styleSheet.toString())
         }
+         */
 
         pane.prefHeightProperty().bind(scene.heightProperty())
         pane.prefWidthProperty().bind(scene.widthProperty())
@@ -156,11 +161,14 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
         lineNumberArea.nodeOrientation = NodeOrientation.RIGHT_TO_LEFT
 
         consoleArea.maxHeight = CONSOLE_HEIGHT
+        contentArea.minWidth = MIN_TEXT_CONTENT_WIDTH
     }
 
     private fun initBoxes() {
         toolBox.addAll(newFileButton, openFileButton, saveFileButton, copyTextButton, pasteTextButton, cutTextButton, buildProjectButton, appTeam)
         initHBox(contentBox, 2.0, lineNumberArea, contentArea)
+        contentArea.prefWidth = Double.MAX_VALUE
+        contentBox.prefWidth = Double.MAX_VALUE
         initVBox(mainBox, 1.0, contentBox, consoleArea)
         initHBox(statusBox, 5.0, statusLabel, filePathLabel)
     }
