@@ -23,7 +23,7 @@ class AppHandler : IAppHandler {
     val fileController = FileController()
     val robot = Robot()
 
-    val APPLICATION_TEAM_MESSAGE = "Aplicativo desenvolvido pelos alunos Fábio Luiz Fischer & Matheus Felipe Klauberg para disciplina de Compiladores."
+    val APPLICATION_TEAM_MESSAGE = "Aplicativo desenvolvido pelos aluno Fábio Luiz Fischer para disciplina de Compiladores."
 
     override fun newFileRequest(root: MainScreen) {
         try {
@@ -121,11 +121,14 @@ class AppHandler : IAppHandler {
 
     override fun buildProjectRequest(root: MainScreen) {
         try {
+            root.writeConsole("compilação de programas ainda não foi implementada\n", true)
+            /*
             if (root.contentArea.text.isNullOrEmpty()) {
                 root.writeConsole("nenhum programa para compilar na área reservada para mensagens.")
             } else {
                 root.writeConsole("programa compilado com sucesso\n", true)
             }
+            */
         } catch (e: Exception) {
             println(e.printStackTrace())
             root.showDialogMessage(Settings.APP_NAME, "Erro ao compilar programa.", e.message!!, Alert.AlertType.ERROR)
@@ -171,7 +174,6 @@ class AppHandler : IAppHandler {
             if (aux == 0) return line
             aux--
         }
-
         return 0
     }
 }

@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView
 import javafx.scene.input.KeyCode
 import javafx.scene.input.KeyCodeCombination
 import javafx.scene.input.KeyCombination
+import javafx.scene.input.KeyEvent
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
@@ -30,8 +31,9 @@ import java.nio.file.Path
 
 class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
     val TOOL_BAR_WIDTH = 145.0
-    val TOOL_BAR_HEIGHT = 590.0
-    val CONSOLE_HEIGHT = 100.0
+    val TOOL_BAR_HEIGHT = 390.0
+    val CONSOLE_HEIGHT = 105.0
+    val CONSOLE_WIDTH = 750.0
     val STATUS_BAR_HEIGHT = 25.0
     val STATUS_BAR_WIDTH = 100.0
     val LINE_NUMBER_WIDTH = 42.0
@@ -40,7 +42,7 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
 
     private val toolBox = ButtonBar(TOOL_BAR_HEIGHT, 2.0)
     private val contentBox = HBox()
-    private val bottomBox = VBox()
+    private val mainBox = VBox()
     private val statusBox = HBox()
 
     private val newFileButton = Button()
@@ -91,24 +93,24 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
     @Suppress("NON_EXHAUSTIVE_WHEN")
     override fun initScene(): Scene {
         //pane.top = upperBox
-        pane.left = contentBox
-        pane.center = contentArea
-        pane.bottom = bottomBox
+        pane.left = toolBox
+        pane.center = mainBox
+        pane.bottom = statusBox
 
         val scene = Scene(pane, screenSize.x, screenSize.y)
 
-        scene.setOnKeyPressed { event ->
-            when (event.code) {
-                KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_ANY).code -> fileHandler.newFileRequest(this)
-                KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_ANY).code -> fileHandler.openFileRequest(this)
-                KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_ANY).code -> fileHandler.saveFileRequest(this)
-                KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_ANY).code -> fileHandler.copyTextRequest(this)
-                KeyCodeCombination(KeyCode.V, KeyCombination.CONTROL_ANY).code -> fileHandler.pasteTextRequest(this)
-                KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_ANY).code -> fileHandler.cutTextRequest(this)
-                KeyCode.F9 -> fileHandler.buildProjectRequest(this)
-                KeyCode.F1 -> fileHandler.applicationTeamRequest(this)
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, { event ->
+            when {
+                KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN).match(event) -> fileHandler.newFileRequest(this)
+                KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN).match(event) -> fileHandler.openFileRequest(this)
+                KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN).match(event) -> fileHandler.saveFileRequest(this)
+                KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN).match(event) -> fileHandler.copyTextRequest(this)
+                KeyCodeCombination(KeyCode.V, KeyCombination.CONTROL_DOWN).match(event) -> fileHandler.pasteTextRequest(this)
+                KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN).match(event) -> fileHandler.cutTextRequest(this)
+                KeyCode.F9 == event.code -> fileHandler.buildProjectRequest(this)
+                KeyCode.F1 == event.code -> fileHandler.applicationTeamRequest(this)
             }
-        }
+        })
 
         /**
          * Utilizar para build
@@ -143,17 +145,20 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
 
     private fun initTextAreas() {
         initTextArea(lineNumberArea, LINE_NUMBER_WIDTH, screenSize.x, false, true)
-        initTextArea(consoleArea, screenSize.y, CONSOLE_HEIGHT, false)
+        initTextArea(consoleArea, CONSOLE_WIDTH, CONSOLE_HEIGHT, false)
         initTextArea(contentArea, screenSize.y, screenSize.x)
 
+        lineNumberArea.maxWidth = LINE_NUMBER_WIDTH
         lineNumberArea.nodeOrientation = NodeOrientation.RIGHT_TO_LEFT
+
+        consoleArea.maxHeight = CONSOLE_HEIGHT
     }
 
     private fun initBoxes() {
         toolBox.addAll(newFileButton, openFileButton, saveFileButton, copyTextButton, pasteTextButton, cutTextButton, buildProjectButton, appTeam)
-        initHBox(contentBox, 2.0, toolBox, lineNumberArea)
+        initHBox(contentBox, 2.0, lineNumberArea, contentArea)
+        initVBox(mainBox, 1.0, contentBox, consoleArea)
         initHBox(statusBox, 5.0, statusLabel, filePathLabel)
-        initVBox(bottomBox, 1.0, consoleArea, statusBox)
     }
 
     private fun initButtons() {
