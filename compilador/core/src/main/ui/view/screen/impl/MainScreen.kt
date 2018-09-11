@@ -99,14 +99,18 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
 
         val scene = Scene(pane, screenSize.x, screenSize.y)
 
+        scene.setOnKeyPressed { event ->
+            when (event.code) {
+                KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_ANY).code -> fileHandler.newFileRequest(this)
+                KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_ANY).code -> fileHandler.openFileRequest(this)
+                KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_ANY).code -> fileHandler.saveFileRequest(this)
+                KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_ANY).code -> fileHandler.copyTextRequest(this)
+                KeyCodeCombination(KeyCode.V, KeyCombination.CONTROL_ANY).code -> fileHandler.pasteTextRequest(this)
+                KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_ANY).code -> fileHandler.cutTextRequest(this)
+            }
+        }
         scene.addEventFilter(KeyEvent.KEY_PRESSED, { event ->
             when {
-                KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN).match(event) -> fileHandler.newFileRequest(this)
-                KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN).match(event) -> fileHandler.openFileRequest(this)
-                KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN).match(event) -> fileHandler.saveFileRequest(this)
-                KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN).match(event) -> fileHandler.copyTextRequest(this)
-                KeyCodeCombination(KeyCode.V, KeyCombination.CONTROL_DOWN).match(event) -> fileHandler.pasteTextRequest(this)
-                KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN).match(event) -> fileHandler.cutTextRequest(this)
                 KeyCode.F9 == event.code -> fileHandler.buildProjectRequest(this)
                 KeyCode.F1 == event.code -> fileHandler.applicationTeamRequest(this)
             }

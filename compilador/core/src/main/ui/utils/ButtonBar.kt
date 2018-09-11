@@ -14,12 +14,12 @@ import javafx.scene.layout.Priority
 class ButtonBar(selfMaxHeight: Double = Double.MAX_VALUE, spacing: Double = 0.0, vararg buttons: Button) : VBox(spacing) {
     init {
 
-        maxHeight = 380.0
+        maxHeight = selfMaxHeight
 
         children.addAll(buttons)
         for (b in buttons) {
             VBox.setVgrow(b, Priority.ALWAYS)
-            //b.maxHeight = Double.MAX_VALUE
+            b.maxHeight = Double.MAX_VALUE
         }
     }
 
