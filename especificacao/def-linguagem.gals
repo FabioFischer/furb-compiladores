@@ -1,0 +1,101 @@
+#Options
+GenerateScanner = true
+GenerateParser = true
+Language = Java
+ScannerName = Lexico
+ParserName = Sintatico
+SemanticName = Semantico
+ScannerCaseSensitive = true
+ScannerTable = Full
+Input = String
+Parser = SLR
+#RegularDefinitions
+
+  letMai: [A-Z]
+
+  letMin: [a-z]
+
+  dig: [0-9]
+
+  caracForm: [\\n\\t\\s]
+
+  exc: [^\\n\\"\\]
+
+  excCom: [^\n\*\\]
+#Tokens
+
+
+  // expressões
+
+  palavra_reservada: {letMin}+ ( {letMai}? {letMin} )*
+
+  identificador: \_ (  {letMin}+ {letMai}? | {letMai} ) ( ( {letMin} | {dig} ) | ( ( {letMin} | {dig} )+ {letMai} ) )*
+
+  constante_numerica: {dig}+ (\. {dig}+)?
+
+  constante_caractere: \' {caracForm} \'
+
+  constante_literal: \" (exc)* \"
+
+  comentario_linha: \/\*\* ( {excCom} | ( \* ) + ( \* {excCom}+ )* )* \ \*\*\/
+
+
+  // palavras reservadas
+
+  AND = identificador : "and"
+  
+  ARRAY = identificador : "array"
+
+  DO = identificador : "do"
+
+  EXIT = identificador  : "exit"
+
+  FALSE = identificador : "false"
+
+  IF = identificador : "if"
+
+  IFFALSEDO = identificador : "ifFalseDo"
+
+  IFTRUEDO = identificador : "ifTrueDo"
+
+  LITERAL = identificador : "literal"
+
+  LOGICAL = identificador : "logical"
+
+  NUMBER = identificador : "number"
+
+  NOT = identificador : "not"
+
+  OR = identificador : "or"
+
+  READ = identificador : "read"
+
+  TRUE = identificador : "true"
+
+  WRITE = identificador : "write"
+
+  // símbolos especiais
+
+  "("
+  ")"
+  "["
+  "]"
+  "=="
+  "<>"
+  "<"
+  "<="
+  ">"
+  ">="
+  "+"
+  "-"
+  "*"
+  "/"
+  "'"
+
+  // ignorar caractéres de formação
+
+  : {ws}
+#NonTerminals
+
+#Grammar
+
