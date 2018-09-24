@@ -1,14 +1,11 @@
 #Options
 GenerateScanner = true
-GenerateParser = true
+GenerateParser = false
 Language = Java
 ScannerName = Lexico
-ParserName = Sintatico
-SemanticName = Semantico
 ScannerCaseSensitive = true
-ScannerTable = Full
+ScannerTable = Compact
 Input = String
-Parser = SLR
 #RegularDefinitions
 
   letMai: [A-Z]
@@ -19,9 +16,11 @@ Parser = SLR
 
   caracForm: [\\n\\t\\s]
 
-  exc: [^\\n\\"\\]
+  exc: [^\\n\"\\]
 
-  excCom: [^\n\*\\]
+  excCom: [^\\n\*\\]
+
+  ws: [\ \t\n\r]
 #Tokens
 
 
@@ -29,50 +28,50 @@ Parser = SLR
 
   palavra_reservada: {letMin}+ ( {letMai}? {letMin} )*
 
-  identificador: \_ (  {letMin}+ {letMai}? | {letMai} ) ( ( {letMin} | {dig} ) | ( ( {letMin} | {dig} )+ {letMai} ) )*
+  identificador: _ (  {letMin}+ {letMai}? | {letMai} ) ( ( {letMin} | {dig} ) | ( ( {letMin} | {dig} )+ {letMai} ) )*
 
   constante_numerica: {dig}+ (\. {dig}+)?
 
-  constante_caractere: \' {caracForm} \'
+  constante_caractere: ' {caracForm} '
 
   constante_literal: \" (exc)* \"
 
-  comentario_linha: \/\*\* ( {excCom} | ( \* ) + ( \* {excCom}+ )* )* \ \*\*\/
+  comentario_linha: /\*\* ( {excCom} | ( \* ) + ( \* {excCom}+ )* )* \ \*\*/
 
 
   // palavras reservadas
 
-  AND = identificador : "and"
+  and = palavra_reservada : "and"
   
-  ARRAY = identificador : "array"
+  ARRAY = palavra_reservada : "array"
 
-  DO = identificador : "do"
+  DO = palavra_reservada : "do"
 
-  EXIT = identificador  : "exit"
+  EXIT = palavra_reservada  : "exit"
 
-  FALSE = identificador : "false"
+  FALSE = palavra_reservada : "false"
 
-  IF = identificador : "if"
+  IF = palavra_reservada : "if"
 
-  IFFALSEDO = identificador : "ifFalseDo"
+  IFFALSEDO = palavra_reservada : "ifFalseDo"
 
-  IFTRUEDO = identificador : "ifTrueDo"
+  IFTRUEDO = palavra_reservada : "ifTrueDo"
 
-  LITERAL = identificador : "literal"
+  LITERAL = palavra_reservada : "literal"
 
-  LOGICAL = identificador : "logical"
+  LOGICAL = palavra_reservada : "logical"
 
-  NUMBER = identificador : "number"
+  NUMBER = palavra_reservada : "number"
 
-  NOT = identificador : "not"
+  NOT = palavra_reservada : "not"
 
-  OR = identificador : "or"
+  OR = palavra_reservada : "or"
 
-  READ = identificador : "read"
+  READ = palavra_reservada : "read"
 
-  TRUE = identificador : "true"
+  TRUE = palavra_reservada : "true"
 
-  WRITE = identificador : "write"
+  WRITE = palavra_reservada : "write"
 
   // símbolos especiais
 
@@ -95,7 +94,3 @@ Parser = SLR
   // ignorar caractéres de formação
 
   : {ws}
-#NonTerminals
-
-#Grammar
-
