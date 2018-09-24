@@ -1,5 +1,7 @@
 package ui.view.handler.impl
 
+import gals.Lexico
+import gals.Token
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import javafx.stage.FileChooser
@@ -23,7 +25,9 @@ class AppHandler : IAppHandler {
     val fileController = FileController()
     val robot = Robot()
 
-    val APPLICATION_TEAM_MESSAGE = "Aplicativo desenvolvido pelos aluno Fábio Luiz Fischer para disciplina de Compiladores."
+    val lexical = Lexico()
+
+    val APPLICATION_TEAM_MESSAGE = "Aplicativo desenvolvido pelo aluno Fábio Luiz Fischer para disciplina de Compiladores."
 
     override fun newFileRequest(root: MainScreen) {
         try {
@@ -121,14 +125,29 @@ class AppHandler : IAppHandler {
 
     override fun buildProjectRequest(root: MainScreen) {
         try {
-            root.writeConsole("compilação de programas ainda não foi implementada\n", true)
-            /*
             if (root.contentArea.text.isNullOrEmpty()) {
-                root.writeConsole("nenhum programa para compilar na área reservada para mensagens.")
+                root.writeConsole("nenhum programa para compilar")
             } else {
-                root.writeConsole("programa compilado com sucesso\n", true)
+                lexical.setInput(root.contentArea.text)
+
+                var t: Token? = null
+                val strBuilder = StringBuilder(
+                    rightPad("linha", 15) +
+                    rightPad("classe", 50) +
+                    rightPad("lexema", 100) +
+                    "\n"
+                )
+
+                while ({ t = lexical.nextToken(); t }() != null) {
+                    strBuilder.append(
+                        "\n${rightPad(getLine(root, t!!.position).toString(), 15)}" +
+                            //rightPad(t!!.tokenKind.description.toString(), 50) +
+                            rightPad(t!!.lexeme.toString(), 100))
+                }
+                strBuilder.append("\n\nprograma compilado com sucesso\n")
+                root.writeConsole(strBuilder.toString(), true)
             }
-            */
+
         } catch (e: Exception) {
             println(e.printStackTrace())
             root.showDialogMessage(Settings.APP_NAME, "Erro ao compilar programa.", e.message!!, Alert.AlertType.ERROR)
@@ -175,5 +194,9 @@ class AppHandler : IAppHandler {
             aux--
         }
         return 0
+    }
+
+    private fun rightPad(text: String, length: Int): String {
+        return String.format("%-${length}s", text)
     }
 }

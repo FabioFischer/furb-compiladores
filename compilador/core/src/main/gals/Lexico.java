@@ -1,3 +1,12 @@
+package gals;
+
+/**
+ *   FURB - Bacharelado em Ciências da Computação
+ *   Compiladores - Interface
+ *
+ *   Fábio Luiz Fischer
+ **/
+
 public class Lexico implements Constants
 {
     private int position;
