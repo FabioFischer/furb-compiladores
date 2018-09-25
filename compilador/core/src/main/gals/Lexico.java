@@ -1,5 +1,7 @@
 package gals;
 
+import java.lang.reflect.Field;
+
 /**
  *   FURB - Bacharelado em Ciências da Computação
  *   Compiladores - Interface
@@ -63,7 +65,11 @@ public class Lexico implements Constants
             }
         }
         if (endState < 0 || (endState != state && tokenForState(lastState) == -2))
-            throw new LexicalError(SCANNER_ERROR[lastState], start);
+            if (lastState == 0) {
+                throw new LexicalError(SCANNER_ERROR[lastState], start, input.substring(start, start + 1));
+            } else {
+                throw new LexicalError(SCANNER_ERROR[lastState], start);
+            }
 
         position = end;
 
@@ -74,8 +80,9 @@ public class Lexico implements Constants
         else
         {
             String lexeme = input.substring(start, end);
-            token = lookupToken(token, lexeme);
-            return new Token(token, lexeme, start);
+            Token tk = new Token(getTokenKind(lookupToken(token, lexeme)), lexeme, start);
+
+            return (tk.getTokenKind().getTokenClassType() == TokenClass.Class.COMENTARIO_LINHA) ? nextToken() : tk;
         }
     }
 
@@ -139,5 +146,22 @@ public class Lexico implements Constants
             return input.charAt(position++);
         else
             return (char) -1;
+    }
+
+    private TokenKind getTokenKind(int id) {
+        try {
+            for (Field field : this.getClass().getFields()) {
+                if (field.getType() == TokenKind.class) {
+                    TokenKind tokenKind = (TokenKind) field.get(this);
+
+                    if (tokenKind.getId() == id) {
+                        return tokenKind;
+                    }
+                }
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return new TokenKind(id, TokenClass.Class.NAO_IDENTIFICADO);
     }
 }

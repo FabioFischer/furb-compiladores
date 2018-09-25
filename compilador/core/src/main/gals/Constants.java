@@ -9,49 +9,49 @@ package gals;
 
 public interface Constants extends ScannerConstants
 {
-    int EPSILON  = 0;
-    int DOLLAR   = 1;
+    TokenKind EPSILON = new TokenKind(0, TokenClass.Class.SIMBOLO_ESPECIAL);
+    TokenKind DOLLAR = new TokenKind(1, TokenClass.Class.SIMBOLO_ESPECIAL);
 
-    int t_palavra_reservada = 2;
-    int t_identificador = 3;
-    int t_constante_numerica = 4;
-    int t_constante_caractere = 5;
-    int t_constante_literal = 6;
-    int t_comentario_linha = 7;
-    int t_and = 8;
-    int t_ARRAY = 9;
-    int t_DO = 10;
-    int t_EXIT = 11;
-    int t_FALSE = 12;
-    int t_IF = 13;
-    int t_IFFALSEDO = 14;
-    int t_IFTRUEDO = 15;
-    int t_LITERAL = 16;
-    int t_LOGICAL = 17;
-    int t_NUMBER = 18;
-    int t_NOT = 19;
-    int t_OR = 20;
-    int t_READ = 21;
-    int t_TRUE = 22;
-    int t_WRITE = 23;
-    int t_TOKEN_24 = 24; //":"
-    int t_TOKEN_25 = 25; //","
-    int t_TOKEN_26 = 26; //"["
-    int t_TOKEN_27 = 27; //"]"
-    int t_TOKEN_28 = 28; //"{"
-    int t_TOKEN_29 = 29; //"}"
-    int t_TOKEN_30 = 30; //"("
-    int t_TOKEN_31 = 31; //")"
-    int t_TOKEN_32 = 32; //":="
-    int t_TOKEN_33 = 33; //"+"
-    int t_TOKEN_34 = 34; //"-"
-    int t_TOKEN_35 = 35; //"*"
-    int t_TOKEN_36 = 36; //"/"
-    int t_TOKEN_37 = 37; //"="
-    int t_TOKEN_38 = 38; //"!="
-    int t_TOKEN_39 = 39; //"<"
-    int t_TOKEN_40 = 40; //"<="
-    int t_TOKEN_41 = 41; //">"
-    int t_TOKEN_42 = 42; //">="
+    TokenKind t_palavra_reservada = new TokenKind(2, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_identificador = new TokenKind(3, TokenClass.Class.IDENTIFICADOR);
+    TokenKind t_constante_numerica = new TokenKind(4, TokenClass.Class.CONSTANTE_NUMERICA);
+    TokenKind t_constante_caractere = new TokenKind(5, TokenClass.Class.CONSTANTE_CARACTERE);
+    TokenKind t_constante_literal = new TokenKind(6, TokenClass.Class.CONSTANTE_LITERAL);
+    TokenKind t_comentario_linha = new TokenKind(7, TokenClass.Class.COMENTARIO_LINHA);
+    TokenKind t_and = new TokenKind(8, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_ARRAY = new TokenKind(9, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_DO = new TokenKind(10, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_EXIT = new TokenKind(11, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_FALSE = new TokenKind(12, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_IF = new TokenKind(13, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_IFFALSEDO = new TokenKind(14, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_IFTRUEDO = new TokenKind(15, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_LITERAL = new TokenKind(16, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_LOGICAL = new TokenKind(17, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_NUMBER = new TokenKind(18, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_NOT = new TokenKind(19, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_OR = new TokenKind(20, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_READ = new TokenKind(21, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_TRUE = new TokenKind(22, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_WRITE = new TokenKind(23, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_TOKEN_24 = new TokenKind(24, TokenClass.Class.SIMBOLO_ESPECIAL); //":"
+    TokenKind t_TOKEN_25 = new TokenKind(25, TokenClass.Class.SIMBOLO_ESPECIAL); //","
+    TokenKind t_TOKEN_26 = new TokenKind(26, TokenClass.Class.SIMBOLO_ESPECIAL); //"["
+    TokenKind t_TOKEN_27 = new TokenKind(27, TokenClass.Class.SIMBOLO_ESPECIAL); //"]"
+    TokenKind t_TOKEN_28 = new TokenKind(28, TokenClass.Class.SIMBOLO_ESPECIAL); //"{"
+    TokenKind t_TOKEN_29 = new TokenKind(29, TokenClass.Class.SIMBOLO_ESPECIAL); //"}"
+    TokenKind t_TOKEN_30 = new TokenKind(30, TokenClass.Class.SIMBOLO_ESPECIAL); //"("
+    TokenKind t_TOKEN_31 = new TokenKind(31, TokenClass.Class.SIMBOLO_ESPECIAL); //")"
+    TokenKind t_TOKEN_32 = new TokenKind(32, TokenClass.Class.SIMBOLO_ESPECIAL); //":="
+    TokenKind t_TOKEN_33 = new TokenKind(33, TokenClass.Class.SIMBOLO_ESPECIAL); //"+"
+    TokenKind t_TOKEN_34 = new TokenKind(34, TokenClass.Class.SIMBOLO_ESPECIAL); //"-"
+    TokenKind t_TOKEN_35 = new TokenKind(35, TokenClass.Class.SIMBOLO_ESPECIAL); //"*"
+    TokenKind t_TOKEN_36 = new TokenKind(36, TokenClass.Class.SIMBOLO_ESPECIAL); //"/"
+    TokenKind t_TOKEN_37 = new TokenKind(37, TokenClass.Class.SIMBOLO_ESPECIAL); //"="
+    TokenKind t_TOKEN_38 = new TokenKind(38, TokenClass.Class.SIMBOLO_ESPECIAL); //"!="
+    TokenKind t_TOKEN_39 = new TokenKind(39, TokenClass.Class.SIMBOLO_ESPECIAL); //"<"
+    TokenKind t_TOKEN_40 = new TokenKind(40, TokenClass.Class.SIMBOLO_ESPECIAL); //"<="
+    TokenKind t_TOKEN_41 = new TokenKind(41, TokenClass.Class.SIMBOLO_ESPECIAL); //">"
+    TokenKind t_TOKEN_42 = new TokenKind(42, TokenClass.Class.SIMBOLO_ESPECIAL); //">="
 
 }

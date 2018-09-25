@@ -1,5 +1,6 @@
 package ui.view.handler.impl
 
+import gals.LexicalError
 import gals.Lexico
 import gals.Token
 import javafx.scene.control.Alert
@@ -141,13 +142,14 @@ class AppHandler : IAppHandler {
                 while ({ t = lexical.nextToken(); t }() != null) {
                     strBuilder.append(
                         "\n${rightPad(getLine(root, t!!.position).toString(), 15)}" +
-                            //rightPad(t!!.tokenKind.description.toString(), 50) +
+                            rightPad(t!!.tokenKind.description.toString(), 50) +
                             rightPad(t!!.lexeme.toString(), 100))
                 }
                 strBuilder.append("\n\nprograma compilado com sucesso\n")
                 root.writeConsole(strBuilder.toString(), true)
             }
-
+        } catch (e: LexicalError) {
+            root.writeConsole("Erro na linha ${getLine(root, e.position)} - ${e.message!!}", true)
         } catch (e: Exception) {
             println(e.printStackTrace())
             root.showDialogMessage(Settings.APP_NAME, "Erro ao compilar programa.", e.message!!, Alert.AlertType.ERROR)

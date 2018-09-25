@@ -10,6 +10,13 @@ package gals;
 public class AnalysisError extends Exception
 {
     private int position;
+    private String description;
+
+    public AnalysisError(String msg, int position, String description) {
+        super(msg);
+        this.position = position;
+        this.description = description;
+    }
 
     public AnalysisError(String msg, int position)
     {
@@ -23,8 +30,11 @@ public class AnalysisError extends Exception
         this.position = -1;
     }
 
-    public int getPosition()
-    {
+    public String getDescription() {
+        return (description == null || description.isEmpty()) ? "" : description;
+    }
+
+    public int getPosition() {
         return position;
     }
 
