@@ -5,7 +5,7 @@ Language = Java
 ScannerName = Lexico
 ScannerCaseSensitive = true
 ScannerTable = Compact
-Input = String
+Input = Stream
 #RegularDefinitions
 
   letMai: [A-Z]
@@ -41,7 +41,7 @@ Input = String
 
   // palavras reservadas
 
-  and = palavra_reservada : "and"
+  AND = palavra_reservada : "and"
   
   ARRAY = palavra_reservada : "array"
 

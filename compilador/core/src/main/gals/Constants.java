@@ -18,7 +18,7 @@ public interface Constants extends ScannerConstants
     TokenKind t_constante_caractere = new TokenKind(5, TokenClass.Class.CONSTANTE_CARACTERE);
     TokenKind t_constante_literal = new TokenKind(6, TokenClass.Class.CONSTANTE_LITERAL);
     TokenKind t_comentario_linha = new TokenKind(7, TokenClass.Class.COMENTARIO_LINHA);
-    TokenKind t_and = new TokenKind(8, TokenClass.Class.PALAVRA_RESERVADA);
+    TokenKind t_AND = new TokenKind(8, TokenClass.Class.PALAVRA_RESERVADA);
     TokenKind t_ARRAY = new TokenKind(9, TokenClass.Class.PALAVRA_RESERVADA);
     TokenKind t_DO = new TokenKind(10, TokenClass.Class.PALAVRA_RESERVADA);
     TokenKind t_EXIT = new TokenKind(11, TokenClass.Class.PALAVRA_RESERVADA);
