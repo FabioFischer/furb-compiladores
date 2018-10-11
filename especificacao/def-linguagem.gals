@@ -1,0 +1,217 @@
+#Options
+GenerateScanner = true
+GenerateParser = true
+Language = Java
+ScannerName = Lexico
+ParserName = Sintatico
+SemanticName = Semantico
+ScannerCaseSensitive = true
+ScannerTable = Compact
+Input = Stream
+Parser = LL
+#RegularDefinitions
+
+  letMai: [A-Z]
+
+  letMin: [a-z]
+
+  dig: [0-9]
+
+  caracForm: \\n|\\t|\\s
+
+  exc: [^\n\"\\]
+
+  excCom: [^\n\*\\]
+
+  ws: [\ \t\n\r]
+#Tokens
+
+
+  // expressões
+
+  palavra_reservada: {letMin}+ ( {letMai}? {letMin} )*
+
+  identificador: _ (  ({letMin})+ {letMai}? | {letMai} ) ( ( {letMin} | {dig} ) | ( ( {letMin} | {dig} )+ {letMai} ) )*
+
+  constante_numerica: {dig}+ (\. {dig}+)?
+
+  constante_caractere: ' {caracForm} '
+
+  constante_literal: \" ({exc})* \"
+
+  comentario_linha: /\*\* ( {excCom} | ( \* ) + ( \* {excCom}+ )* )* \ \*\*/
+
+
+  // palavras reservadas
+
+  AND = palavra_reservada : "and"
+  
+  ARRAY = palavra_reservada : "array"
+
+  DO = palavra_reservada : "do"
+
+  EXIT = palavra_reservada  : "exit"
+
+  FALSE = palavra_reservada : "false"
+
+  IF = palavra_reservada : "if"
+
+  IFFALSEDO = palavra_reservada : "ifFalseDo"
+
+  IFTRUEDO = palavra_reservada : "ifTrueDo"
+
+  LITERAL = palavra_reservada : "literal"
+
+  LOGICAL = palavra_reservada : "logical"
+
+  NUMBER = palavra_reservada : "number"
+
+  NOT = palavra_reservada : "not"
+
+  OR = palavra_reservada : "or"
+
+  READ = palavra_reservada : "read"
+
+  TRUE = palavra_reservada : "true"
+
+  WRITE = palavra_reservada : "write"
+
+  // símbolos especiais
+
+  ":"
+  ","
+  "["
+  "]"
+  "{"
+  "}"
+  "("
+  ")"
+  ":="
+  "+"
+  "-"
+  "*"
+  "/"
+  "="
+  "!="
+  "<"
+  "<="
+  ">"
+  ">="
+
+  // ignorar caractéres de formação
+
+  : {ws}
+#NonTerminals
+<programa>
+
+<declaracao_de_variaveis>
+
+<lista_de_comandos>
+
+<lista_de_comandos2>
+
+<comando>
+
+<comando_de_atribuicao>
+<comando_de_entrada>
+<comando_de_saida>
+<comando_de_selecao>
+<comando_de_repeticao>
+
+<declaracao>
+<declaracao_opcional>
+
+<tipo>
+
+<lista_de_identificadores>
+<lista_de_identificadores_opcional>
+
+<declarao_opcional>
+
+<tipo_simples>
+<tipo_array>
+
+<expressao>
+<expressao_opcional>
+<expressao_opcional2>
+
+<lista_de_identificadores_entrada>
+<lista_de_identificadores_entrada_opcional>
+
+<expressao_entrada_opcional>
+
+<lista_de_expressoes>
+<lista_de_expressoes_opcional>
+
+<clausula_opcional>
+
+<elemento>
+
+<relacional>
+
+<operador_relacional>
+
+<aritmetica>
+
+<termo>
+
+<fator>
+#Grammar
+<programa> ::= <declaracao_de_variaveis> "(" <lista_de_comandos> ")";
+
+<lista_de_comandos> ::= <lista_de_comandos2>;
+<lista_de_comandos2> ::= î | <comando> <lista_de_comandos>;
+
+<comando> ::= <comando_de_atribuicao> | <comando_de_entrada> | <comando_de_saida> | <comando_de_selecao> | <comando_de_repeticao>;
+
+<declaracao_de_variaveis> ::= <declaracao_opcional>;
+<declaracao_opcional> ::= î | <declaracao>;
+
+<declaracao> ::= <tipo> ":" <lista_de_identificadores> <declaracao_opcional>;
+
+<tipo> ::= <tipo_simples> | <tipo_array>;
+
+<tipo_simples> ::= NUMBER | LITERAL | LOGICAL;
+
+<tipo_array> ::= ARRAY "[" <tipo_simples> "," constante_numerica "]";
+
+<lista_de_identificadores> ::= identificador <lista_de_identificadores_opcional>;
+<lista_de_identificadores_opcional> ::= î | "," <lista_de_identificadores>;
+
+<comando_de_atribuicao> ::= identificador <expressao_opcional> ":=" <expressao>;
+
+<expressao_opcional> ::= î | <expressao_opcional2>;
+<expressao_opcional2> ::= "[" <expressao> "]";
+
+<comando_de_entrada> ::= READ "(" <lista_de_identificadores_entrada> ")";
+
+<lista_de_identificadores_entrada> ::= identificador <expressao_entrada_opcional> <lista_de_identificadores_entrada_opcional>;
+<lista_de_identificadores_entrada_opcional> ::= î | "," <lista_de_identificadores_entrada>;
+
+<expressao_entrada_opcional> ::= î | <expressao_opcional2>;
+
+<comando_de_saida> ::= WRITE "(" <lista_de_expressoes> ")";
+
+<lista_de_expressoes> ::= <expressao> <lista_de_expressoes_opcional>;
+<lista_de_expressoes_opcional> ::= î | "," <lista_de_expressoes>;
+
+<comando_de_selecao> ::= "(" <expressao> ")" IFTRUEDO "{" <lista_de_comandos> "}" <clausula_opcional>;
+
+<clausula_opcional> ::= î | IFFALSEDO "{" <lista_de_comandos> "}";
+
+<comando_de_repeticao> ::= DO "{" <lista_de_comandos> IF "(" <expressao> ")" EXIT <lista_de_comandos> "}";
+
+<expressao> ::= <expressao> AND <elemento> | <expressao> OR <elemento> | <elemento>;
+
+<elemento> ::= <relacional> | TRUE | FALSE | NOT <elemento>;
+
+<relacional> ::= <aritmetica> <operador_relacional> <aritmetica> | <aritmetica>;
+
+<operador_relacional> ::= "=" | "!=" | "<" | "<=" | ">" | ">=";
+
+<aritmetica> ::= <aritmetica> "+" <termo> | <aritmetica> "-" <termo> | <termo>;
+
+<termo> ::= <termo> "*" <fator> | <termo> "/" <fator> | <fator>;
+
+<fator> ::= identificador | identificador "[" <expressao> "]" | constante_numerica | constante_caractere | constante_literal | "(" <expressao> ")" | "+" <fator> | "-" <fator>;
+
