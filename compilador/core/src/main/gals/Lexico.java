@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 
 /**
  *   FURB - Bacharelado em Ciências da Computação
- *   Compiladores - Interface
+ *   Compiladores - Sintatico
  *
  *   Fábio Luiz Fischer
  **/

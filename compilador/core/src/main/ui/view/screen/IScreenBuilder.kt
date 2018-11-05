@@ -5,7 +5,7 @@ import javafx.stage.Stage
 
 /**
  *   FURB - Bacharelado em Ciências da Computação
- *   Compiladores - Interface
+ *   Compiladores - Sintatico
  *
  *   Fábio Luiz Fischer
  **/

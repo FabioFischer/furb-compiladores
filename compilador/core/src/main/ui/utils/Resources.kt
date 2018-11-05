@@ -12,6 +12,7 @@ import java.nio.file.Paths
  **/
 
 object Resources {
+    /*
     val newFile: Image = Image(Paths.get("res/icon/gallery/new.png").toRealPath().toUri().toString())
     val openFile: Image = Image(Paths.get("res/icon/gallery/open.png").toRealPath().toUri().toString())
     val saveFile: Image = Image(Paths.get("res/icon/gallery/save.png").toRealPath().toUri().toString())
@@ -24,9 +25,9 @@ object Resources {
     fun getStyleSheets():List<URI> {
       return listOf(Paths.get("res/style/text-area.css").toRealPath().toUri())
     }
-    /*
 
     Alterar caminhos para build
+    */
 
 
     val newFile: Image = Image("res/icon/gallery/new.png")
@@ -41,5 +42,4 @@ object Resources {
     fun getStyleSheets():List<String> {
         return listOf(Resources::class.java.getResource("style/text-area.css").toExternalForm())
     }
-    */
 }

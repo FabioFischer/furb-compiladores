@@ -12,7 +12,7 @@ import ui.view.screen.IScreenBuilder
 
 /**
  *   FURB - Bacharelado em Ciências da Computação
- *   Compiladores - Interface
+ *   Compiladores - SIntatico
  *
  *   Fábio Luiz Fischer
  **/

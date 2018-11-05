@@ -1,7 +1,11 @@
 package ui.view.handler.impl
 
 import gals.LexicalError
+import gals.SyntaticError
+import gals.SemanticError
 import gals.Lexico
+import gals.Semantico
+import gals.Sintatico
 import gals.Token
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
@@ -17,7 +21,7 @@ import java.io.StringReader
 
 /**
  *   FURB - Bacharelado em Ciências da Computação
- *   Compiladores - Interface
+ *   Compiladores - Sintatico
  *
  *   Fábio Luiz Fischer
  **/
@@ -26,7 +30,7 @@ class AppHandler : IAppHandler {
     val fileController = FileController()
     val robot = Robot()
 
-    val lexical = Lexico()
+    val syntatic = Sintatico()
 
     val APPLICATION_TEAM_MESSAGE = "Aplicativo desenvolvido pelo aluno Fábio Luiz Fischer para disciplina de Compiladores."
 
@@ -129,26 +133,12 @@ class AppHandler : IAppHandler {
             if (root.contentArea.text.isNullOrEmpty()) {
                 root.writeConsole("nenhum programa para compilar")
             } else {
-                lexical.setInput(root.contentArea.text)
-
-                var t: Token? = null
-                val strBuilder = StringBuilder(
-                    rightPad("linha", 15) +
-                    rightPad("classe", 50) +
-                    rightPad("lexema", 100) +
-                    "\n"
-                )
-
-                while ({ t = lexical.nextToken(); t }() != null) {
-                    strBuilder.append(
-                        "\n${rightPad(getLine(root, t!!.position).toString(), 15)}" +
-                            rightPad(t!!.tokenKind.description.toString(), 50) +
-                            rightPad(t!!.lexeme.toString(), 100))
-                }
-                strBuilder.append("\n\nprograma compilado com sucesso\n")
-                root.writeConsole(strBuilder.toString(), true)
+                syntatic.parse(Lexico(root.contentArea.text), Semantico())
+                root.writeConsole("programa compilado com sucesso\n", true)
             }
         } catch (e: LexicalError) {
+            root.writeConsole("Erro na linha ${getLine(root, e.position)} - ${e.message!!}", true)
+        } catch (e: SyntaticError) {
             root.writeConsole("Erro na linha ${getLine(root, e.position)} - ${e.message!!}", true)
         } catch (e: Exception) {
             println(e.printStackTrace())

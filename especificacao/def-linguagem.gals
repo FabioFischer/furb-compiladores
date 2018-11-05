@@ -39,7 +39,7 @@ Parser = LL
 
   constante_literal: \" ({exc})* \"
 
-  comentario_linha: /\*\* ( {excCom} | ( \* ) + ( \* {excCom}+ )* )* \ \*\*/
+  :! /\*\* ( {excCom} | ( \* ) + ( \* {excCom}+ )* )* \ \*\*/
 
 
   // palavras reservadas
@@ -132,6 +132,8 @@ Parser = LL
 <tipo_array>
 
 <expressao>
+<expressao2>
+
 <expressao_opcional>
 <expressao_opcional2>
 
@@ -148,16 +150,20 @@ Parser = LL
 <elemento>
 
 <relacional>
+<relacional_opcional>
 
 <operador_relacional>
 
 <aritmetica>
+<aritmetica2>
 
 <termo>
+<termo2>
 
 <fator>
+<fator2>
 #Grammar
-<programa> ::= <declaracao_de_variaveis> "(" <lista_de_comandos> ")";
+<programa> ::= <declaracao_de_variaveis> "{" <lista_de_comandos> "}";
 
 <lista_de_comandos> ::= <lista_de_comandos2>;
 <lista_de_comandos2> ::= î | <comando> <lista_de_comandos>;
@@ -201,17 +207,21 @@ Parser = LL
 
 <comando_de_repeticao> ::= DO "{" <lista_de_comandos> IF "(" <expressao> ")" EXIT <lista_de_comandos> "}";
 
-<expressao> ::= <expressao> AND <elemento> | <expressao> OR <elemento> | <elemento>;
+<expressao> ::= <elemento> <expressao2>;
+<expressao2> ::= î | AND <elemento> <expressao2> | OR <elemento> <expressao2>;
 
 <elemento> ::= <relacional> | TRUE | FALSE | NOT <elemento>;
 
-<relacional> ::= <aritmetica> <operador_relacional> <aritmetica> | <aritmetica>;
+<relacional> ::= <aritmetica> <relacional_opcional>;
+<relacional_opcional> ::= î | <operador_relacional> <aritmetica>;
 
 <operador_relacional> ::= "=" | "!=" | "<" | "<=" | ">" | ">=";
 
-<aritmetica> ::= <aritmetica> "+" <termo> | <aritmetica> "-" <termo> | <termo>;
+<aritmetica> ::= <termo> <aritmetica2>;
+<aritmetica2> ::= î | "+" <termo> <aritmetica2> | "-" <termo> <aritmetica2>;
 
-<termo> ::= <termo> "*" <fator> | <termo> "/" <fator> | <fator>;
+<termo> ::= <fator> <termo2>;
+<termo2> ::= î | "*" <fator> <termo2> | "/" <fator> <termo2> ;
 
-<fator> ::= identificador | identificador "[" <expressao> "]" | constante_numerica | constante_caractere | constante_literal | "(" <expressao> ")" | "+" <fator> | "-" <fator>;
-
+<fator> ::= identificador <fator2> | constante_numerica | constante_caractere | constante_literal | "(" <expressao> ")" | "+" <fator> | "-" <fator>;
+<fator2> ::= î |  "[" <expressao> "]";

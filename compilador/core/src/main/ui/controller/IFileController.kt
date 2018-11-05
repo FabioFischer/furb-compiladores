@@ -5,7 +5,7 @@ import java.nio.file.Path
 
 /**
  *   FURB - Bacharelado em Ciências da Computação
- *   Compiladores - Interface
+ *   Compiladores - Sintatico
  *
  *   Fábio Luiz Fischer
  **/
