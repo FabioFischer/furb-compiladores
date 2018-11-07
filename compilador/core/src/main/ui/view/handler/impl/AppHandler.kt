@@ -131,7 +131,7 @@ class AppHandler : IAppHandler {
     override fun buildProjectRequest(root: MainScreen) {
         try {
             if (root.contentArea.text.isNullOrEmpty()) {
-                root.writeConsole("nenhum programa para compilar")
+                root.writeConsole("nenhum programa para compilar\n", true)
             } else {
                 syntatic.parse(Lexico(root.contentArea.text), Semantico())
                 root.writeConsole("programa compilado com sucesso\n", true)
