@@ -14,8 +14,8 @@ import java.util.Optional;
 
 public enum SemanticActions {
 
-    Number1(1, null),
-    Number2(2, null);
+    Number15(15, HeaderAction.class),
+    Number16(16, FooterAction.class);
 
     private final int action;
     private Class<? extends SemanticAction> classe;

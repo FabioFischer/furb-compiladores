@@ -48,9 +48,6 @@ public class Sintatico implements Constants
         int x = ((Integer)stack.pop()).intValue();
         int a = currentToken.getTokenKind().getId();
 
-        System.out.println(x);
-        System.out.println(a);
-
         if (x == EPSILON.getId())
         {
             return false;
@@ -112,8 +109,6 @@ public class Sintatico implements Constants
         stack.clear();
         stack.push(new Integer(DOLLAR.getId()));
         stack.push(new Integer(START_SYMBOL));
-
-        System.out.println(FIRST_SEMANTIC_ACTION);
 
         currentToken = scanner.nextToken();
 
