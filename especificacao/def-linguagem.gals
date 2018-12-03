@@ -7,7 +7,7 @@ ParserName = Sintatico
 SemanticName = Semantico
 ScannerCaseSensitive = true
 ScannerTable = Compact
-Input = Stream
+Input = String
 Parser = LL
 #RegularDefinitions
 
@@ -163,7 +163,7 @@ Parser = LL
 <fator>
 <fator2>
 #Grammar
-<programa> ::= <declaracao_de_variaveis> "{" <lista_de_comandos> "}";
+<programa> ::= #15 <declaracao_de_variaveis> "{" <lista_de_comandos> "}" #16 ;
 
 <lista_de_comandos> ::= <lista_de_comandos2>;
 <lista_de_comandos2> ::= î | <comando> <lista_de_comandos>;
@@ -173,7 +173,7 @@ Parser = LL
 <declaracao_de_variaveis> ::= <declaracao_opcional>;
 <declaracao_opcional> ::= î | <declaracao>;
 
-<declaracao> ::= <tipo> ":" <lista_de_identificadores> <declaracao_opcional>;
+<declaracao> ::= <tipo> #101 ":" <lista_de_identificadores> #103 <declaracao_opcional>;
 
 <tipo> ::= <tipo_simples> | <tipo_array>;
 
@@ -181,47 +181,47 @@ Parser = LL
 
 <tipo_array> ::= ARRAY "[" <tipo_simples> "," constante_numerica "]";
 
-<lista_de_identificadores> ::= identificador <lista_de_identificadores_opcional>;
+<lista_de_identificadores> ::= identificador #102 <lista_de_identificadores_opcional>;
 <lista_de_identificadores_opcional> ::= î | "," <lista_de_identificadores>;
 
-<comando_de_atribuicao> ::= identificador <expressao_opcional> ":=" <expressao>;
+<comando_de_atribuicao> ::= identificador #102 <expressao_opcional> ":=" <expressao> #106;
 
 <expressao_opcional> ::= î | <expressao_opcional2>;
 <expressao_opcional2> ::= "[" <expressao> "]";
 
-<comando_de_entrada> ::= READ "(" <lista_de_identificadores_entrada> ")";
+<comando_de_entrada> ::= READ "(" <lista_de_identificadores_entrada> #104 ")";
 
-<lista_de_identificadores_entrada> ::= identificador <expressao_entrada_opcional> <lista_de_identificadores_entrada_opcional>;
+<lista_de_identificadores_entrada> ::= identificador #102 <expressao_entrada_opcional> <lista_de_identificadores_entrada_opcional>;
 <lista_de_identificadores_entrada_opcional> ::= î | "," <lista_de_identificadores_entrada>;
 
 <expressao_entrada_opcional> ::= î | <expressao_opcional2>;
 
 <comando_de_saida> ::= WRITE "(" <lista_de_expressoes> ")";
 
-<lista_de_expressoes> ::= <expressao> <lista_de_expressoes_opcional>;
+<lista_de_expressoes> ::= <expressao> #14 <lista_de_expressoes_opcional>;
 <lista_de_expressoes_opcional> ::= î | "," <lista_de_expressoes>;
 
-<comando_de_selecao> ::= "(" <expressao> ")" IFTRUEDO "{" <lista_de_comandos> "}" <clausula_opcional>;
+<comando_de_selecao> ::= "(" <expressao> #107 ")" IFTRUEDO "{" <lista_de_comandos> "}" <clausula_opcional> #108 ;
 
-<clausula_opcional> ::= î | IFFALSEDO "{" <lista_de_comandos> "}";
+<clausula_opcional> ::= î | #109 IFFALSEDO "{" <lista_de_comandos> "}";
 
-<comando_de_repeticao> ::= DO "{" <lista_de_comandos> IF "(" <expressao> ")" EXIT <lista_de_comandos> "}";
+<comando_de_repeticao> ::= #110 DO "{" <lista_de_comandos> IF "(" <expressao> #111 ")" EXIT <lista_de_comandos> "}" #112 ;
 
 <expressao> ::= <elemento> <expressao2>;
-<expressao2> ::= î | AND <elemento> <expressao2> | OR <elemento> <expressao2>;
+<expressao2> ::= î | AND <elemento> #17 <expressao2> | OR <elemento> #18 <expressao2>;
 
-<elemento> ::= <relacional> | TRUE | FALSE | NOT <elemento>;
+<elemento> ::= <relacional> | TRUE #11 | FALSE #12 | NOT <elemento> #13 ;
 
 <relacional> ::= <aritmetica> <relacional_opcional>;
-<relacional_opcional> ::= î | <operador_relacional> <aritmetica>;
+<relacional_opcional> ::= î | <operador_relacional> #9 <aritmetica> #10;
 
 <operador_relacional> ::= "=" | "!=" | "<" | "<=" | ">" | ">=";
 
 <aritmetica> ::= <termo> <aritmetica2>;
-<aritmetica2> ::= î | "+" <termo> <aritmetica2> | "-" <termo> <aritmetica2>;
+<aritmetica2> ::= î | "+" <termo> #1 <aritmetica2> | "-" <termo> #2 <aritmetica2>;
 
 <termo> ::= <fator> <termo2>;
-<termo2> ::= î | "*" <fator> <termo2> | "/" <fator> <termo2> ;
+<termo2> ::= î | "*" <fator> #3 <termo2> | "/" <fator> #4 <termo2> ;
 
-<fator> ::= identificador <fator2> | constante_numerica | constante_caractere | constante_literal | "(" <expressao> ")" | "+" <fator> | "-" <fator>;
+<fator> ::= identificador #105 <fator2> | constante_numerica #6 | constante_caractere #19 | constante_literal #20 | "(" <expressao> ")" | "+" <fator> #7 | "-" <fator> #8;
 <fator2> ::= î |  "[" <expressao> "]";

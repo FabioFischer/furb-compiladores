@@ -2,7 +2,7 @@ package gals;
 
 /**
  *   FURB - Bacharelado em Ciências da Computação
- *   Compiladores - Interface
+ *   Compiladores - Semantico
  *
  *   Fábio Luiz Fischer
  **/

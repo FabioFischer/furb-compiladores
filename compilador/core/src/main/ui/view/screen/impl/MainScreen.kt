@@ -26,7 +26,7 @@ import java.nio.file.Path
 
 /**
  *   FURB - Bacharelado em Ciências da Computação
- *   Compiladores - Sintatico
+ *   Compiladores - Semantico
  *
  *   Fábio Luiz Fischer
  **/
@@ -122,16 +122,13 @@ class MainScreen : AbstractScreen(Settings.MIN_SCREEN_SIZE, Settings.APP_NAME) {
         /**
          * Utilizar para build
          *
-         */
         for (styleSheet in Resources.getStyleSheets()) {
-            scene.stylesheets.add(styleSheet)
+        scene.stylesheets.add(styleSheet)
         }
-        /**
+         */
         for (styleSheet in Resources.getStyleSheets()) {
             scene.stylesheets.add(styleSheet.toString())
         }
-         *
-         */
 
         pane.prefHeightProperty().bind(scene.heightProperty())
         pane.prefWidthProperty().bind(scene.widthProperty())

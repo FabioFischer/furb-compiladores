@@ -2,7 +2,7 @@ package gals;
 
 /**
  *   FURB - Bacharelado em Ciências da Computação
- *   Compiladores - Sintatico
+ *   Compiladores - Semantico
  *
  *   Fábio Luiz Fischer
  **/
@@ -2497,7 +2497,7 @@ public interface ScannerConstants
             {
                     " símbolo inválido",
                     "",
-                    "Erro identificando \"!=\"",
+                    " símbolo inválido",
                     "constante literal inválida ou não finalizada",
                     "constante caractere inválida",
                     "",

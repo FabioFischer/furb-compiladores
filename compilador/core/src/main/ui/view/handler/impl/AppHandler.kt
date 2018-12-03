@@ -133,7 +133,38 @@ class AppHandler : IAppHandler {
             if (root.contentArea.text.isNullOrEmpty()) {
                 root.writeConsole("nenhum programa para compilar\n", true)
             } else {
-                syntatic.parse(Lexico(root.contentArea.text), Semantico())
+                val semantico = Semantico()
+
+                syntatic.parse(Lexico(root.contentArea.text), semantico)
+
+                val objectCode = semantico.objectCode
+
+                println(objectCode)
+
+                try {
+                    if (root.actualPath == null) {
+                        val chooser = FileChooser()
+
+                        chooser.title = "Save File"
+                        chooser.extensionFilters.addAll(Settings.VALID_EXTENSIONS)
+
+                        val file = chooser.showSaveDialog(root.stage)
+
+                        if (file != null) {
+                            fileController.new(fileController.getFileName(file.path.toString()), ".txt", root.contentArea.text, false)
+                            fileController.new(fileController.getFileName(file.path.toString()), ".il", objectCode, false)
+                            root.actualPath = file.toPath()
+                            root.isFileChanged = false
+                        }
+                    } else {
+                        fileController.save(fileController.getFileName(root.actualPath.toString()), ".txt", root.contentArea.text)
+                        fileController.save(fileController.getFileName(root.actualPath.toString()), ".il", objectCode)
+                        root.isFileChanged = false
+                    }
+                } catch (e: Exception) {
+                    root.showDialogMessage(Settings.APP_NAME, "Erro ao salvar arquivo.", e.message!!, Alert.AlertType.ERROR)
+                }
+
                 root.writeConsole("programa compilado com sucesso\n", true)
             }
         } catch (e: LexicalError) {

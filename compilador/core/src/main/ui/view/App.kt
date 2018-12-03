@@ -10,7 +10,6 @@ import javax.swing.JOptionPane
  *
  *   Fábio Luiz Fischer
 */
-/*
 
 object App {
     @JvmStatic fun main(args: Array<String>) {
@@ -22,9 +21,9 @@ object App {
         }
     }
 }
- **/
 
 // Para gerar arquivo .jar, deve-se utilizar a função 'main' abaixo
+/*
 fun main(args: Array<String>) {
     try {
         Application.launch(MainScreen::class.java)
@@ -33,3 +32,4 @@ fun main(args: Array<String>) {
         JOptionPane.showMessageDialog(null, e.message + " - " + e.stackTrace);
     }
 }
+        */
