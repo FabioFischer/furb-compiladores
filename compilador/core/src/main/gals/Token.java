@@ -47,6 +47,6 @@ public class Token
     }
 
     public String toString() {
-        return tokenKind.getId() + " ( " + description + " ) @ " + position;
+        return tokenKind.getId() + " |" + lexeme + "| " + " ( " + description + " ) @ " + position;
     }
 }

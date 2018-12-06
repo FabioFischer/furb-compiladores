@@ -8,10 +8,9 @@ package gals;
  **/
 
 public enum IdentifierType {
-    INT("int64"),
-    FLOAT("float64", "Double"),
-    STRING("string"),
-    BOOLEAN("bool", "Boolean");
+    NUMBER("float64", "Double"),
+    LITERAL("string"),
+    LOGICAL("bool", "Boolean");
 
     private final String primitiveName;
     private final CorrespondingClass correspondingClass;

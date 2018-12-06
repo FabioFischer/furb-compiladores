@@ -15,7 +15,12 @@ import java.util.Optional;
 public enum SemanticActions {
 
     Number15(15, HeaderAction.class),
-    Number16(16, FooterAction.class);
+    Number16(16, FooterAction.class),
+    Number101(101, SetIdentifierTypeAction.class),
+    Number102(102, PushIdentifierAction.class),
+    Number103(103, MassDeclarationVariablesAction.class),
+    Number104(104, InputAction.class),
+    Number105(105, PushIdentifierTypeAction.class);
 
     private final int action;
     private Class<? extends SemanticAction> classe;

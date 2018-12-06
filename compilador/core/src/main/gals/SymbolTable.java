@@ -19,6 +19,7 @@ public class SymbolTable {
     private final Stack<String> relationalOperators;
     private final Stack<String> rotules;
 
+    private IdentifierType declarationIdentifierType;
     private int lastRotule = 0;
 
     public SymbolTable() {
@@ -51,6 +52,14 @@ public class SymbolTable {
 
     public Stack<String> getRotules() {
         return this.rotules;
+    }
+
+    public IdentifierType getDeclarationIdentifierType() {
+        return this.declarationIdentifierType;
+    }
+
+    public void setDeclarationIdentifierType(IdentifierType declarationIdentifierType) {
+        this.declarationIdentifierType = declarationIdentifierType;
     }
 
     public String createRotule() {
