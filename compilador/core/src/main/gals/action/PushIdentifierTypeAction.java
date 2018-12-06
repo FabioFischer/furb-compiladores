@@ -17,7 +17,7 @@ public class PushIdentifierTypeAction extends SemanticAction {
         super(symbolTable);
     }
 
-    public String execute(Token token) {
+    public String execute(Token token) throws SemanticError {
         if (!this.getSymbolTable().getIdentifiers().containsKey(token.getLexeme())) {
             throw new SemanticError(token.getLexeme() + " nao declarado", token.getPosition());
         }
