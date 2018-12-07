@@ -63,7 +63,7 @@ public class SymbolTable {
     }
 
     public String createRotule() {
-        String rotule = "R" + this.lastRotule;
+        String rotule = "label" + this.lastRotule;
         this.rotules.push(rotule);
         lastRotule++;
         return rotule;

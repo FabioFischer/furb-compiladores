@@ -38,9 +38,9 @@ public enum SemanticActions {
     Action104(104, InputAction.class),
     Action105(105, PushIdentifierTypeAction.class),
     Action106(106, VariableAttribuitionAction.class),
-    Action107(107, null), // TODO
-    Action108(108, null), // TODO
-    Action109(109, null), // TODO
+    Action107(107, SelectionInitBlockAction.class),
+    Action108(108, SelectionEndBlockAction.class),
+    Action109(109, SelectionEndAction.class),
     Action110(110, null), // TODO
     Action111(111, null), // TODO
     Action112(112, null); // TODO
