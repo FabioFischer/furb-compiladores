@@ -1,12 +1,6 @@
 package ui.view.handler.impl
 
-import gals.LexicalError
-import gals.SyntaticError
-import gals.SemanticError
-import gals.Lexico
-import gals.Semantico
-import gals.Sintatico
-import gals.Token
+import gals.*
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import javafx.stage.FileChooser
@@ -21,7 +15,7 @@ import java.io.StringReader
 
 /**
  *   FURB - Bacharelado em Ciências da Computação
- *   Compiladores - Sintatico
+ *   Compiladores - Semantico
  *
  *   Fábio Luiz Fischer
  **/
@@ -167,9 +161,7 @@ class AppHandler : IAppHandler {
 
                 root.writeConsole("programa compilado com sucesso\n", true)
             }
-        } catch (e: LexicalError) {
-            root.writeConsole("Erro na linha ${getLine(root, e.position)} - ${e.message!!}", true)
-        } catch (e: SyntaticError) {
+        } catch (e: AnalysisError) {
             root.writeConsole("Erro na linha ${getLine(root, e.position)} - ${e.message!!}", true)
         } catch (e: Exception) {
             println(e.printStackTrace())

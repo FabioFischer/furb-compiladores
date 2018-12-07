@@ -16,10 +16,6 @@ public final class FooterAction extends SemanticAction {
     }
 
     public String execute(Token token) {
-        return (
-                "ret\n" +
-                        "}\n" +
-                        "}"
-        );
+        return ("ret\n" + "}\n" + "}");
     }
 }

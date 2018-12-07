@@ -26,12 +26,13 @@ public enum SemanticActions {
     Action11(11, LogicalTrueAllocationAction.class),
     Action12(12, LogicalFalseAllocationAction.class),
     Action13(13, LogicalNegationAction.class),
+    Action14(14, OutputAction.class),
     Action15(15, HeaderAction.class),
     Action16(16, FooterAction.class),
     Action17(17, LogicalAndAction.class),
     Action18(18, LogicalOrAction.class),
-    Action19(19, null), // TODO
-    Action20(20, null), // TODO
+    Action19(19, LiteralAllocationAction.class),
+    Action20(20, CharacterAllocationAction.class),
     Action101(101, SetIdentifierTypeAction.class),
     Action102(102, PushIdentifierAction.class),
     Action103(103, MassDeclarationVariablesAction.class),
@@ -41,9 +42,9 @@ public enum SemanticActions {
     Action107(107, SelectionInitBlockAction.class),
     Action108(108, SelectionEndBlockAction.class),
     Action109(109, SelectionEndAction.class),
-    Action110(110, null), // TODO
-    Action111(111, null), // TODO
-    Action112(112, null); // TODO
+    Action110(110, RepetitionInitBlockAction.class),
+    Action111(111, RepetitionEndBlockAction.class),
+    Action112(112, RepetitionEndAction.class);
 
     private final int action;
     private Class<? extends SemanticAction> classe;
