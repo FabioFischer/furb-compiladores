@@ -9,8 +9,8 @@ import gals.*;
  *   Fábio Luiz Fischer
  **/
 
-public class VariableAttributionAction extends SemanticAction {
-    public VariableAttributionAction(SymbolTable symbolTable) {
+public class VariableAttribuitionAction extends SemanticAction {
+    public VariableAttribuitionAction(SymbolTable symbolTable) {
         super(symbolTable);
     }
 
