@@ -20,7 +20,7 @@ public class SymbolTable {
     private final Stack<String> rotules;
 
     private IdentifierType declarationIdentifierType;
-    private int lastRotule = 0;
+    private int lastRotule = 1;
 
     public SymbolTable() {
         this.stackIdentifiers = new Stack<>();

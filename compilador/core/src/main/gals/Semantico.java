@@ -22,10 +22,7 @@ public class Semantico implements Constants
 
     public void executeAction(int actionId, Token token)	throws SemanticError
     {
-        System.out.println("Acao #"+actionId+", Token: "+token);
         SemanticAction action = this.semanticActionFactory.create(actionId);
-        String generatedCode = action.execute(token);
-
-        this.objectCode.add(generatedCode);
+        this.objectCode.add(action.execute(token));
     }	
 }

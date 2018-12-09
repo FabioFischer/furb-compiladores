@@ -25,7 +25,7 @@ public class MassDeclarationVariablesAction extends SemanticAction {
             objectCode.append(addIdentifierToStack(token, identifier));
 
             while (this.getSymbolTable().getStackIdentifiers().size() > 0) {
-                identifier = this.getSymbolTable().getStackIdentifiers().pop();
+                identifier = new Identifier(this.getSymbolTable().getStackIdentifiers().pop().getName(), identifierType);
                 objectCode.append(", " + addIdentifierToStack(token, identifier));
             }
             objectCode.append(")\n");
